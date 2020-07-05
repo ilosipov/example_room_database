@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Example Room Database</string>
+
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_age">Age</string>
+    <string name="btn_add">Add</string>
+    <string name="text_btn_add">Save user</string>
+
+    <string name="text_snack_bar_success">Successfully added!</string>
+    <string name="text_snack_bar_error">Please fill out all fields.</string>
+
 </resources>
