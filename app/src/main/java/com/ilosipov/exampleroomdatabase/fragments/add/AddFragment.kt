@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.ilosipov.exampleroomdatabase.R
 import com.ilosipov.exampleroomdatabase.data.User
 import com.ilosipov.exampleroomdatabase.data.UserViewModel
+import com.ilosipov.exampleroomdatabase.utils.ShowSoftwareKeyboard
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
 
@@ -51,6 +52,7 @@ class AddFragment : Fragment() {
             Snackbar.make(this.requireView(), getString(R.string.text_snack_bar_success),
                 Snackbar.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
+            ShowSoftwareKeyboard(requireActivity()).show(false)
         } else {
             // Not Create User Object
             Snackbar.make(this.requireView(), getString(R.string.text_snack_bar_error),
@@ -60,5 +62,10 @@ class AddFragment : Fragment() {
 
     private fun inputCheck(firstName: String, lastName: String, age: Editable) : Boolean {
         return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName) && age.isEmpty())
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ShowSoftwareKeyboard(requireActivity()).show(false)
     }
 }
