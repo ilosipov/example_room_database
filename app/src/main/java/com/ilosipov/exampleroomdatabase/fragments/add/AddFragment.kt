@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.ilosipov.exampleroomdatabase.R
-import com.ilosipov.exampleroomdatabase.data.User
-import com.ilosipov.exampleroomdatabase.data.UserViewModel
+import com.ilosipov.exampleroomdatabase.model.User
+import com.ilosipov.exampleroomdatabase.viewmodel.UserViewModel
 import com.ilosipov.exampleroomdatabase.utils.ShowSoftwareKeyboard
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
@@ -47,7 +47,12 @@ class AddFragment : Fragment() {
 
         if (inputCheck(firstName, lastName, age)) {
             // Create User Object
-            val user = User(0, firstName, lastName, Integer.parseInt(age.toString()))
+            val user = User(
+                0,
+                firstName,
+                lastName,
+                Integer.parseInt(age.toString())
+            )
             userViewModel.addUser(user)
             Snackbar.make(this.requireView(), getString(R.string.text_snack_bar_success),
                 Snackbar.LENGTH_SHORT).show()

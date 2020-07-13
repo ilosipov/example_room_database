@@ -3,9 +3,10 @@ package com.ilosipov.exampleroomdatabase.fragments.list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ilosipov.exampleroomdatabase.R
-import com.ilosipov.exampleroomdatabase.data.User
+import com.ilosipov.exampleroomdatabase.model.User
 import kotlinx.android.synthetic.main.custom_row.view.*
 
 /**
@@ -30,6 +31,11 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         holder.itemView.text_id.text = item.id.toString()
         holder.itemView.text_first_name.text = String.format("%s %s", item.firstName, item.lastName)
         holder.itemView.text_age.text = item.age.toString()
+
+        holder.itemView.row_layout.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(item)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount() : Int = userList.size
