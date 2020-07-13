@@ -28,8 +28,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         val item = userList[position]
 
         holder.itemView.text_id.text = item.id.toString()
-        holder.itemView.text_first_name.text = item.firstName
-        holder.itemView.text_last_name.text = item.lastName
+        holder.itemView.text_first_name.text = String.format("%s %s", item.firstName, item.lastName)
         holder.itemView.text_age.text = item.age.toString()
     }
 
