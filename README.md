@@ -12,6 +12,7 @@ Description
 Screen  
 ------  
 ![sample](./image/first_screen.png)
+![sample](./image/second_screen.png)
 
 Contact 
 ------- 
