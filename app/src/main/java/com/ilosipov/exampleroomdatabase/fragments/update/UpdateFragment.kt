@@ -1,11 +1,10 @@
 package com.ilosipov.exampleroomdatabase.fragments.update
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -44,6 +43,8 @@ class UpdateFragment : Fragment() {
             updateItem()
         }
 
+        setHasOptionsMenu(true)
+
         return view
     }
 
@@ -65,6 +66,38 @@ class UpdateFragment : Fragment() {
 
     private fun inputCheck(firstName: String, lastName: String, age: Editable) : Boolean {
         return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName) && age.isEmpty())
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_delete, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean {
+        if (item.itemId == R.id.btn_delete) {
+            deleteUser()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteUser() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton(getString(R.string.positive_btn_dialog)) { _, _ ->
+            userViewModel.deleteUser(args.currentUser)
+            Snackbar.make(this.requireView(), String.format(
+                getString(R.string.text_snack_bar_delete), args.currentUser.firstName),
+                Snackbar.LENGTH_SHORT).show()
+            ShowSoftwareKeyboard(requireActivity()).show(false)
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+        }
+        builder.setNegativeButton(getString(R.string.negative_btn_dialog)) { _, _ -> }
+        builder.setTitle(String.format(
+            getString(R.string.title_delete_user),
+            args.currentUser.firstName,
+            args.currentUser.lastName))
+        builder.setMessage(String.format(
+            getString(R.string.message_delete_user),
+            args.currentUser.firstName))
+        builder.create().show()
     }
 
     override fun onDestroy() {
